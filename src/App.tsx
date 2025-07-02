@@ -26,9 +26,7 @@ function App() {
   return (
     <>
       <div>
-        <code>
-          {JSON.stringify(data, null, 2)}
-        </code>
+        <NodeDisplay nodes={data?.nodes || []} />
       </div>
     </>
   )
