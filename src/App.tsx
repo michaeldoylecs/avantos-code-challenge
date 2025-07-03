@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
-import { ActionBlueprintGraphSchema, type ActionBlueprintGraph } from './types/ActionBlueprintGraph'
+import { ActionBlueprintGraphSchema } from './types/ActionBlueprintGraph'
+import { useActionBlueprintGraphStore } from './stores/actionBlueprintGraphStore'
 import NodeDisplay from './components/NodeDisplay/NodeDisplay'
 
 function App() {
-  const [data, setData] = useState<ActionBlueprintGraph>()
+  const actionBlueprintGraph = useActionBlueprintGraphStore((state) => state.actionBlueprintGraph)
+  const setFromActionBlueprintGraph = useActionBlueprintGraphStore((state) => state.setFromActionBlueprintGraph)
   
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/1/actions/blueprints/1/graph/")
@@ -19,14 +21,16 @@ function App() {
         return ActionBlueprintGraphSchema.parse(data)
       })
       .then(data => {
-        setData(data)
+        setFromActionBlueprintGraph(data)
       })
   }, [])
+
+  const nodes = actionBlueprintGraph?.nodes || []
 
   return (
     <>
       <div>
-        <NodeDisplay nodes={data?.nodes || []} />
+        <NodeDisplay nodes={nodes} />
       </div>
     </>
   )
