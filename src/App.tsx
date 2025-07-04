@@ -5,8 +5,8 @@ import { useActionBlueprintGraphStore } from './stores/actionBlueprintGraphStore
 import NodeDisplay from './components/NodeDisplay/NodeDisplay'
 
 function App() {
-  const actionBlueprintGraph = useActionBlueprintGraphStore((state) => state.actionBlueprintGraph)
   const setFromActionBlueprintGraph = useActionBlueprintGraphStore((state) => state.setFromActionBlueprintGraph)
+  const getNodes = useActionBlueprintGraphStore((state) => state.getNodes)
   
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/1/actions/blueprints/1/graph/")
@@ -25,7 +25,7 @@ function App() {
       })
   }, [])
 
-  const nodes = actionBlueprintGraph?.nodes || []
+  const nodes = getNodes()
 
   return (
     <>
