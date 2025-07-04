@@ -3,9 +3,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 type NodeListProps = {
   nodes: Node[]
+  onClickCallback: (node: Node) => () => void
 }
 
-export default function NodeDisplay({nodes} : NodeListProps) {
+export default function NodeDisplay({nodes, onClickCallback} : NodeListProps) {
   return (
     <Table>
       <TableHeader>
@@ -16,7 +17,7 @@ export default function NodeDisplay({nodes} : NodeListProps) {
       </TableHeader>
       <TableBody>
         {nodes.map((node, _) => (
-          <TableRow key={node.id} className="hover:cursor-pointer">
+          <TableRow key={node.id} className="hover:cursor-pointer" onClick={onClickCallback(node)}>
             <TableCell className="text-left">{node.data.id}</TableCell>
             <TableCell className="text-left">{node.data.name}</TableCell>
           </TableRow>

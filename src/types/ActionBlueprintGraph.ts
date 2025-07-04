@@ -10,65 +10,65 @@ export const Position = z.object({
   y: z.number(),
 })
 
-export const FieldSchemaPropertyButton = z.object({
-  avantos_type: z.literal("button"),
-  title: z.string(),
-  type: z.string(),
-})
+// export const FieldSchemaPropertyButton = z.object({
+//   avantos_type: z.literal("button"),
+//   title: z.string(),
+//   type: z.string(),
+// })
 
-export const FieldSchemaPropertyCheckboxGroup = z.object({
-  avantos_type: z.literal("checkbox-group"),
-  items: z.object({
-    enum: z.array(z.string()),
-    type: z.string(),
-  }),
-  type: z.string(),
-  uniqueItems: z.boolean(),
-})
+// export const FieldSchemaPropertyCheckboxGroup = z.object({
+//   avantos_type: z.literal("checkbox-group"),
+//   items: z.object({
+//     enum: z.array(z.string()),
+//     type: z.string(),
+//   }),
+//   type: z.string(),
+//   uniqueItems: z.boolean(),
+// })
 
-export const FieldSchemaPropertyObjectEnum = z.object({
-  avantos_type: z.literal("object-enum"),
-  enum: z.any(),
-  title: z.string(),
-  type: z.string(),
-})
+// export const FieldSchemaPropertyObjectEnum = z.object({
+//   avantos_type: z.literal("object-enum"),
+//   enum: z.any(),
+//   title: z.string(),
+//   type: z.string(),
+// })
 
-export const FieldSchemaPropertyShortText = z.object({
-  avantos_type: z.literal("short-text"),
-  format: z.string(),
-  title: z.string(),
-  type: z.string(),
-})
+// export const FieldSchemaPropertyShortText = z.object({
+//   avantos_type: z.literal("short-text"),
+//   format: z.string(),
+//   title: z.string(),
+//   type: z.string(),
+// })
 
-export const FieldSchemaPropertyMultiSelect = z.object({
-  avantos_type: z.literal("multi-select"),
-  items: z.object({
-    enum: z.array(z.string()),
-    type: z.string(),
-  }),
-  type: z.string(),
-  uniqueItems: z.boolean(),
-})
+// export const FieldSchemaPropertyMultiSelect = z.object({
+//   avantos_type: z.literal("multi-select"),
+//   items: z.object({
+//     enum: z.array(z.string()),
+//     type: z.string(),
+//   }),
+//   type: z.string(),
+//   uniqueItems: z.boolean(),
+// })
 
-export const FieldSchemaPropertyMultiLineText = z.object({
-  avantos_type: z.literal("multi-line-text"),
-  title: z.string(),
-  type: z.string(),
-})
+// export const FieldSchemaPropertyMultiLineText = z.object({
+//   avantos_type: z.literal("multi-line-text"),
+//   title: z.string(),
+//   type: z.string(),
+// })
 
-export const FieldSchemaProperty = z.union([
-  FieldSchemaPropertyButton,
-  FieldSchemaPropertyCheckboxGroup,
-  FieldSchemaPropertyObjectEnum,
-  FieldSchemaPropertyShortText,
-  FieldSchemaPropertyMultiSelect,
-  FieldSchemaPropertyMultiLineText,
-])
+// export const FieldSchemaProperty = z.union([
+//   FieldSchemaPropertyButton,
+//   FieldSchemaPropertyCheckboxGroup,
+//   FieldSchemaPropertyObjectEnum,
+//   FieldSchemaPropertyShortText,
+//   FieldSchemaPropertyMultiSelect,
+//   FieldSchemaPropertyMultiLineText,
+// ])
 
-export const FieldSchemaProperties = z.record(z.string(), FieldSchemaProperty)
+export const FieldSchemaProperties = z.record(z.string(), z.any())
 
 export const FieldSchema = z.object({
-  id: z.string(),
+  type: z.string(),
   properties: FieldSchemaProperties,
 })
 
@@ -77,7 +77,7 @@ export const Form = z.object({
   name: z.string(),
   description: z.string(),
   is_reusable: z.boolean(),
-  field_schema: z.object(), // Left untyped
+  field_schema: FieldSchema,
 })
 
 export const Edge = z.object({
@@ -127,12 +127,12 @@ export type Edge = z.infer<typeof Edge>
 export type Form = z.infer<typeof Form>
 export type FieldSchema = z.infer<typeof FieldSchema>
 export type FieldSchemaProperties = z.infer<typeof FieldSchemaProperties>
-export type FieldSchemaProperty = z.infer<typeof FieldSchemaProperty>
-export type FieldSchemaPropertyButton = z.infer<typeof FieldSchemaPropertyButton>
-export type FieldSchemaPropertyCheckboxGroup = z.infer<typeof FieldSchemaPropertyCheckboxGroup>
-export type FieldSchemaPropertyObjectEnum = z.infer<typeof FieldSchemaPropertyObjectEnum>
-export type FieldSchemaPropertyShortText = z.infer<typeof FieldSchemaPropertyShortText>
-export type FieldSchemaPropertyMultiSelect = z.infer<typeof FieldSchemaPropertyMultiSelect>
-export type FieldSchemaPropertyMultiLineText = z.infer<typeof FieldSchemaPropertyMultiLineText>
+// export type FieldSchemaProperty = z.infer<typeof FieldSchemaProperty>
+// export type FieldSchemaPropertyButton = z.infer<typeof FieldSchemaPropertyButton>
+// export type FieldSchemaPropertyCheckboxGroup = z.infer<typeof FieldSchemaPropertyCheckboxGroup>
+// export type FieldSchemaPropertyObjectEnum = z.infer<typeof FieldSchemaPropertyObjectEnum>
+// export type FieldSchemaPropertyShortText = z.infer<typeof FieldSchemaPropertyShortText>
+// export type FieldSchemaPropertyMultiSelect = z.infer<typeof FieldSchemaPropertyMultiSelect>
+// export type FieldSchemaPropertyMultiLineText = z.infer<typeof FieldSchemaPropertyMultiLineText>
 export type Position = z.infer<typeof Position>
 export type SLADuration = z.infer<typeof SLADuration>
