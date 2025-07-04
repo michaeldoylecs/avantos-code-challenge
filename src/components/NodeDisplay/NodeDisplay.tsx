@@ -1,4 +1,5 @@
 import { Node } from "../../types/ActionBlueprintGraph"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 type NodeListProps = {
   nodes: Node[]
@@ -6,10 +7,21 @@ type NodeListProps = {
 
 export default function NodeDisplay({nodes} : NodeListProps) {
   return (
-    <ul>
-      {nodes.map((node, _) => (
-        <li key={node.id}>{node.data.name}</li>
-      ))}
-    </ul>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="text-left">ID</TableHead>
+          <TableHead className="text-left">Name</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {nodes.map((node, _) => (
+          <TableRow key={node.id} className="hover:cursor-pointer">
+            <TableCell className="text-left">{node.data.id}</TableCell>
+            <TableCell className="text-left">{node.data.name}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   )
 }
