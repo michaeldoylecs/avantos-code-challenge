@@ -65,7 +65,9 @@ export const Position = z.object({
 //   FieldSchemaPropertyMultiLineText,
 // ])
 
-export const FieldSchemaProperties = z.record(z.string(), z.any())
+export const FieldSchemaPropertyName = z.string()
+
+export const FieldSchemaProperties = z.record(FieldSchemaPropertyName, z.any())
 
 export const FieldSchema = z.object({
   type: z.string(),
@@ -127,6 +129,7 @@ export type Edge = z.infer<typeof Edge>
 export type Form = z.infer<typeof Form>
 export type FieldSchema = z.infer<typeof FieldSchema>
 export type FieldSchemaProperties = z.infer<typeof FieldSchemaProperties>
+export type FieldSchemaPropertyName = z.infer<typeof FieldSchemaPropertyName>
 // export type FieldSchemaProperty = z.infer<typeof FieldSchemaProperty>
 // export type FieldSchemaPropertyButton = z.infer<typeof FieldSchemaPropertyButton>
 // export type FieldSchemaPropertyCheckboxGroup = z.infer<typeof FieldSchemaPropertyCheckboxGroup>

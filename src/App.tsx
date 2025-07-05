@@ -4,7 +4,9 @@ import { ActionBlueprintGraphSchema, Form, type Node } from './types/ActionBluep
 import { useActionBlueprintGraphStore } from './stores/actionBlueprintGraphStore'
 import NodeDisplay from './components/NodeDisplay/NodeDisplay'
 import { Separator } from '@radix-ui/react-separator'
+import { AppSidebar } from './components/AppSidebar/AppSidebar'
 import Spinner from './components/Spinner/Spinner'
+import { SidebarInset, SidebarProvider } from './components/ui/sidebar'
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -45,33 +47,38 @@ function App() {
     : []
 
   return (
-    <div className="h-screen">
-      {isLoading ? (
-        <div className="h-screen flex flex-col justify-center items-center">
-          <Spinner />
-        </div>
-      ) : (
-        <main className="flex flex-col p-1">
-          <div className="flex flex-col p-1">
-            <h2 className="text-2xl font-bold">Forms</h2>
-            <NodeDisplay nodes={nodes} onClickCallback={nodeOnClickCallback} />
-          </div>
-          <Separator />
-          <div className="flex flex-col p-1">
-            <h2 className="text-2xl font-bold">Form Properties</h2>
-            <div className="flex flex-col">
-              {selectedFormProperties.map(item => (
-                <div key={item} className="flex flex-row h-10 border rounded-sm hover:cursor-pointer">
-                  <div>
-                    {item}
-                  </div> 
-                </div>
-              ))}
+    <SidebarProvider>
+      <AppSidebar data_sources={[]} />
+      <SidebarInset>
+        <div className="h-screen">
+          {isLoading ? (
+            <div className="h-screen flex flex-col justify-center items-center">
+              <Spinner />
             </div>
-          </div>
-        </main>
-      )}
-    </div>
+          ) : (
+            <main className="flex flex-col p-1">
+              <div className="flex flex-col p-1">
+                <h2 className="text-2xl font-bold">Forms</h2>
+                <NodeDisplay nodes={nodes} onClickCallback={nodeOnClickCallback} />
+              </div>
+              <Separator />
+              <div className="flex flex-col p-1">
+                <h2 className="text-2xl font-bold">Form Properties</h2>
+                <div className="flex flex-col">
+                  {selectedFormProperties.map(item => (
+                    <div key={item} className="flex flex-row h-10 border rounded-sm hover:cursor-pointer">
+                      <div>
+                        {item}
+                      </div> 
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </main>
+          )}
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
 

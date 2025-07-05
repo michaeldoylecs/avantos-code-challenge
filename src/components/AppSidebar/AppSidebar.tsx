@@ -1,10 +1,10 @@
-import { Sidebar, ChevronRight } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import {
+  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
@@ -12,17 +12,31 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarRail
+  SidebarRail,
+  SidebarHeader
 } from "../ui/sidebar";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type AppSidebarProps = {
+  data_sources: {
+    name: string,
+    fields: {
+      name: string,
+      onClickCallback: () => void
+    }[]
+  }[]
+} & React.ComponentProps<typeof Sidebar>
+
+export function AppSidebar({ ...props }: AppSidebarProps) {
   return (
-    <Sidebar {...props}>
+    <Sidebar {...props} collapsible={"none"}>
+      <SidebarHeader>
+        Available Data
+      </SidebarHeader>
       <SidebarContent className="gap-0">
-        {data.navMain.map((item) => (
+        {props.data_sources.map((source) => (
           <Collapsible
-            key={item.title}
-            title={item.title}
+            key={source.name}
+            title={source.name}
             defaultOpen
             className="group/collapsible"
           >
@@ -32,17 +46,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
               >
                 <CollapsibleTrigger>
-                  {item.title}{" "}
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  {source.name}
                 </CollapsibleTrigger>
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {item.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={item.isActive}>
-                          <a href={item.url}>{item.title}</a>
+                    {source.fields.map((field) => (
+                      <SidebarMenuItem key={field.name}>
+                        <SidebarMenuButton asChild onClick={field.onClickCallback}>
+                          {field.name}
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
