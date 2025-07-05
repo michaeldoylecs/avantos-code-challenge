@@ -74,8 +74,10 @@ export const FieldSchema = z.object({
   properties: FieldSchemaProperties,
 })
 
+export const FormID = z.string()
+
 export const Form = z.object({
-  id: z.string(),
+  id: FormID,
   name: z.string(),
   description: z.string(),
   is_reusable: z.boolean(),
@@ -87,8 +89,10 @@ export const Edge = z.object({
   target: z.string(),
 })
 
+export const NodeID = z.string()
+
 export const NodeData = z.object({
-  id: z.string(),
+  id: NodeID,
   component_key: z.string(),
   component_type: z.string(),
   component_id: z.string(),
@@ -125,8 +129,10 @@ export const ActionBlueprintGraphSchema = z.object({
 export type ActionBlueprintGraph = z.infer<typeof ActionBlueprintGraphSchema>
 export type Node = z.infer<typeof Node>
 export type NodeData = z.infer<typeof NodeData>
+export type NodeID = z.infer<typeof NodeID>
 export type Edge = z.infer<typeof Edge>
 export type Form = z.infer<typeof Form>
+export type FormID = z.infer<typeof FormID>
 export type FieldSchema = z.infer<typeof FieldSchema>
 export type FieldSchemaProperties = z.infer<typeof FieldSchemaProperties>
 export type FieldSchemaPropertyName = z.infer<typeof FieldSchemaPropertyName>

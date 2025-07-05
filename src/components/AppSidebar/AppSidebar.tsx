@@ -15,15 +15,18 @@ import {
   SidebarRail,
   SidebarHeader
 } from "../ui/sidebar";
+import { ChevronRight } from "lucide-react";
+
+export type AppSidebarDataSources = {
+  name: string,
+  fields: {
+    name: string,
+    onClickCallback: () => void
+  }[]
+}[]
 
 type AppSidebarProps = {
-  data_sources: {
-    name: string,
-    fields: {
-      name: string,
-      onClickCallback: () => void
-    }[]
-  }[]
+  data_sources: AppSidebarDataSources,
 } & React.ComponentProps<typeof Sidebar>
 
 export function AppSidebar({ ...props }: AppSidebarProps) {
@@ -37,16 +40,16 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
           <Collapsible
             key={source.name}
             title={source.name}
-            defaultOpen
             className="group/collapsible"
           >
             <SidebarGroup>
               <SidebarGroupLabel
                 asChild
-                className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
+                className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm text-bold"
               >
                 <CollapsibleTrigger>
                   {source.name}
+                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
                 </CollapsibleTrigger>
               </SidebarGroupLabel>
               <CollapsibleContent>
@@ -54,8 +57,8 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
                   <SidebarMenu>
                     {source.fields.map((field) => (
                       <SidebarMenuItem key={field.name}>
-                        <SidebarMenuButton asChild onClick={field.onClickCallback}>
-                          {field.name}
+                        <SidebarMenuButton asChild onClick={field.onClickCallback} className="pl-5">
+                          <a>{field.name}{""}</a>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
