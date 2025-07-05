@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { ActionBlueprintGraphSchema, FieldSchemaProperties, FieldSchemaPropertyName, type Node } from './types/ActionBlueprintGraph'
-import { useActionBlueprintGraphStore } from './stores/actionBlueprintGraphStore'
+import { useActionBlueprintGraphStore } from './stores/useActionBlueprintGraphStore'
 import NodeDisplay from './components/NodeDisplay/NodeDisplay'
 import { Separator } from '@radix-ui/react-separator'
 import { AppSidebar, type AppSidebarDataSources } from './components/AppSidebar/AppSidebar'
 import Spinner from './components/Spinner/Spinner'
 import { SidebarInset, SidebarProvider } from './components/ui/sidebar'
 import FormTable from './components/FormTable/FormTable'
-import { usePrefillStore } from './stores/prefillStore'
+import { usePrefillStore } from './stores/usePrefillStore'
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -78,27 +78,29 @@ function App() {
   }
 
   return (
-    <SidebarProvider>
-      <AppSidebar data_sources={dataSources} />
-      <SidebarInset>
-        <div className="h-screen">
-          {isLoading ? (
-            <div className="h-screen flex flex-col justify-center items-center">
-              <Spinner />
-            </div>
-          ) : (
-            <main className="flex flex-col p-1">
-              <div className="flex flex-col p-1">
-                <h2 className="text-2xl font-bold">Forms</h2>
-                <NodeDisplay nodes={getNodes()} onClickCallback={nodeOnClickCallback} />
-              </div>
-              <Separator />
-              { !!selectedNode && <FormTable key={selectedNode.id} node={selectedNode} onClickCallback={formPropertySelectCallback} /> }
-            </main>
-          )}
+    <>
+      {isLoading ? (
+        <div className="h-screen flex flex-col justify-center items-center">
+          <Spinner />
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      ) : (
+        <SidebarProvider>
+          <AppSidebar data_sources={dataSources} />
+          <SidebarInset>
+            <div className="h-screen">
+                <main className="flex flex-col p-1">
+                  <div className="flex flex-col p-1">
+                    <h2 className="text-2xl font-bold">Forms</h2>
+                    <NodeDisplay nodes={getNodes()} onClickCallback={nodeOnClickCallback} />
+                  </div>
+                  <Separator />
+                  { !!selectedNode && <FormTable key={selectedNode.id} node={selectedNode} onClickCallback={formPropertySelectCallback} /> }
+                </main>
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
+      )}
+    </>
   )
 }
 

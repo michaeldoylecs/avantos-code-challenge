@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 type NodeListProps = {
   nodes: Node[]
   onClickCallback: (node: Node) => () => void
-}
+} & React.ComponentProps<typeof Table>
 
 export default function NodeDisplay({nodes, onClickCallback} : NodeListProps) {
   return (

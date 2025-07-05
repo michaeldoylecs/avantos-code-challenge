@@ -1,15 +1,15 @@
-import { useActionBlueprintGraphStore } from "@/stores/actionBlueprintGraphStore"
+import { useActionBlueprintGraphStore } from "@/stores/useActionBlueprintGraphStore"
 import { FieldSchemaPropertyName, type Node } from "../../types/ActionBlueprintGraph"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { usePrefillStore } from "@/stores/prefillStore"
+import { usePrefillStore } from "@/stores/usePrefillStore"
 import { Button } from "../ui/button"
 
 type FormTableProps = {
   node: Node
   onClickCallback: (name: FieldSchemaPropertyName) => () => void
-}
+} & React.ComponentProps<typeof Table>
 
-export default function FormTable({node, onClickCallback} : FormTableProps) {
+export default function FormTable({node, onClickCallback, ...props} : FormTableProps) {
   const prefillMap = usePrefillStore((state) => state.prefillMap)
   const removePrefill = usePrefillStore((state) => state.removePrefill)
   const getNode = useActionBlueprintGraphStore((state) => state.getNode)
@@ -33,7 +33,7 @@ export default function FormTable({node, onClickCallback} : FormTableProps) {
   }
 
   return (
-    <Table>
+    <Table {...props}>
       <TableHeader>
         <TableRow>
           <TableHead className="text-left">Name</TableHead>
