@@ -1,14 +1,14 @@
-import * as z from "zod/v4"
+import * as z from "zod/v4";
 
 export const SLADuration = z.object({
   number: z.number(),
   unit: z.string(),
-})
+});
 
 export const Position = z.object({
   x: z.number(),
   y: z.number(),
-})
+});
 
 // export const FieldSchemaPropertyButton = z.object({
 //   avantos_type: z.literal("button"),
@@ -65,16 +65,16 @@ export const Position = z.object({
 //   FieldSchemaPropertyMultiLineText,
 // ])
 
-export const FieldSchemaPropertyName = z.string()
+export const FieldSchemaPropertyName = z.string();
 
-export const FieldSchemaProperties = z.record(FieldSchemaPropertyName, z.any())
+export const FieldSchemaProperties = z.record(FieldSchemaPropertyName, z.any());
 
 export const FieldSchema = z.object({
   type: z.string(),
   properties: FieldSchemaProperties,
-})
+});
 
-export const FormID = z.string()
+export const FormID = z.string();
 
 export const Form = z.object({
   id: FormID,
@@ -82,14 +82,14 @@ export const Form = z.object({
   description: z.string(),
   is_reusable: z.boolean(),
   field_schema: FieldSchema,
-})
+});
 
 export const Edge = z.object({
   source: z.string(),
   target: z.string(),
-})
+});
 
-export const NodeID = z.string()
+export const NodeID = z.string();
 
 export const NodeData = z.object({
   id: NodeID,
@@ -103,17 +103,17 @@ export const NodeData = z.object({
   sla_duration: SLADuration,
   approval_required: z.boolean(),
   approval_roles: z.array(z.string()),
-})
+});
 
 export const Node = z.object({
   id: z.string(),
   type: z.string(),
   position: Position,
   data: NodeData,
-})
+});
 
 export const ActionBlueprintGraphSchema = z.object({
-  "$schema": z.string(),
+  $schema: z.string(),
   id: z.string(),
   tenant_id: z.string(),
   name: z.string(),
@@ -124,18 +124,18 @@ export const ActionBlueprintGraphSchema = z.object({
   forms: z.array(Form),
   branches: z.array(z.string()),
   triggers: z.array(z.string()),
-})
+});
 
-export type ActionBlueprintGraph = z.infer<typeof ActionBlueprintGraphSchema>
-export type Node = z.infer<typeof Node>
-export type NodeData = z.infer<typeof NodeData>
-export type NodeID = z.infer<typeof NodeID>
-export type Edge = z.infer<typeof Edge>
-export type Form = z.infer<typeof Form>
-export type FormID = z.infer<typeof FormID>
-export type FieldSchema = z.infer<typeof FieldSchema>
-export type FieldSchemaProperties = z.infer<typeof FieldSchemaProperties>
-export type FieldSchemaPropertyName = z.infer<typeof FieldSchemaPropertyName>
+export type ActionBlueprintGraph = z.infer<typeof ActionBlueprintGraphSchema>;
+export type Node = z.infer<typeof Node>;
+export type NodeData = z.infer<typeof NodeData>;
+export type NodeID = z.infer<typeof NodeID>;
+export type Edge = z.infer<typeof Edge>;
+export type Form = z.infer<typeof Form>;
+export type FormID = z.infer<typeof FormID>;
+export type FieldSchema = z.infer<typeof FieldSchema>;
+export type FieldSchemaProperties = z.infer<typeof FieldSchemaProperties>;
+export type FieldSchemaPropertyName = z.infer<typeof FieldSchemaPropertyName>;
 // export type FieldSchemaProperty = z.infer<typeof FieldSchemaProperty>
 // export type FieldSchemaPropertyButton = z.infer<typeof FieldSchemaPropertyButton>
 // export type FieldSchemaPropertyCheckboxGroup = z.infer<typeof FieldSchemaPropertyCheckboxGroup>
@@ -143,5 +143,5 @@ export type FieldSchemaPropertyName = z.infer<typeof FieldSchemaPropertyName>
 // export type FieldSchemaPropertyShortText = z.infer<typeof FieldSchemaPropertyShortText>
 // export type FieldSchemaPropertyMultiSelect = z.infer<typeof FieldSchemaPropertyMultiSelect>
 // export type FieldSchemaPropertyMultiLineText = z.infer<typeof FieldSchemaPropertyMultiLineText>
-export type Position = z.infer<typeof Position>
-export type SLADuration = z.infer<typeof SLADuration>
+export type Position = z.infer<typeof Position>;
+export type SLADuration = z.infer<typeof SLADuration>;

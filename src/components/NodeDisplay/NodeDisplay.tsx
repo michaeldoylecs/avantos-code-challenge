@@ -1,12 +1,19 @@
-import { Node } from "../../types/ActionBlueprintGraph"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Node } from "../../types/ActionBlueprintGraph";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 type NodeListProps = {
-  nodes: Node[]
-  onClickCallback: (node: Node) => () => void
-} & React.ComponentProps<typeof Table>
+  nodes: Node[];
+  onClickCallback: (node: Node) => () => void;
+} & React.ComponentProps<typeof Table>;
 
-export default function NodeDisplay({nodes, onClickCallback} : NodeListProps) {
+export default function NodeDisplay({ nodes, onClickCallback }: NodeListProps) {
   return (
     <Table>
       <TableHeader>
@@ -17,12 +24,16 @@ export default function NodeDisplay({nodes, onClickCallback} : NodeListProps) {
       </TableHeader>
       <TableBody>
         {nodes.map((node, _) => (
-          <TableRow key={node.id} className="hover:cursor-pointer" onClick={onClickCallback(node)}>
+          <TableRow
+            key={node.id}
+            className="hover:cursor-pointer"
+            onClick={onClickCallback(node)}
+          >
             <TableCell className="text-left">{node.data.id}</TableCell>
             <TableCell className="text-left">{node.data.name}</TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }

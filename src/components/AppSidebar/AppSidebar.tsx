@@ -2,7 +2,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -13,28 +13,26 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarRail,
-  SidebarHeader
+  SidebarHeader,
 } from "../ui/sidebar";
 import { ChevronRight } from "lucide-react";
 
 export type AppSidebarDataSources = {
-  name: string,
+  name: string;
   fields: {
-    name: string,
-    onClickCallback: () => void
-  }[]
-}[]
+    name: string;
+    onClickCallback: () => void;
+  }[];
+}[];
 
 type AppSidebarProps = {
-  data_sources: AppSidebarDataSources,
-} & React.ComponentProps<typeof Sidebar>
+  data_sources: AppSidebarDataSources;
+} & React.ComponentProps<typeof Sidebar>;
 
 export function AppSidebar({ ...props }: AppSidebarProps) {
   return (
     <Sidebar {...props} collapsible={"none"}>
-      <SidebarHeader>
-        Available Data
-      </SidebarHeader>
+      <SidebarHeader>Available Data</SidebarHeader>
       <SidebarContent className="gap-0">
         {props.data_sources.map((source) => (
           <Collapsible
@@ -57,8 +55,15 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
                   <SidebarMenu>
                     {source.fields.map((field) => (
                       <SidebarMenuItem key={field.name}>
-                        <SidebarMenuButton asChild onClick={field.onClickCallback} className="pl-5">
-                          <a>{field.name}{""}</a>
+                        <SidebarMenuButton
+                          asChild
+                          onClick={field.onClickCallback}
+                          className="pl-5"
+                        >
+                          <a>
+                            {field.name}
+                            {""}
+                          </a>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
@@ -71,5 +76,5 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
